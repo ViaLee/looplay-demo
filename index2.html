@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+  <title>无缝轮播</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .main {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .main > .right {
+      position: absolute;
+      top: 0px;
+      left: 400px;
+      /*transition: all 3s;*/
+    }
+
+    .center {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      transition: all .5s;
+    }
+
+    .left {
+      left: -400px;
+      top: 0px;
+      position: absolute;
+      transition: all .5s;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <img src="https://i.loli.net/2019/03/06/5c7fc5098a369.jpeg" class="center" alt="1" width="400" height="400">
+  <img src="https://i.loli.net/2019/03/06/5c7fc50c23c0b.jpeg" class="right" alt="2" width="400" height="400">
+  <img src="https://i.loli.net/2019/03/06/5c7fc50cbf2ca.jpeg" class="right" alt="3" width="400" height="400">
+  <img src="https://i.loli.net/2019/03/06/5c7fc50d02347.jpeg" class="right" alt="5" width="400" height="400">
+  <img src="https://i.loli.net/2019/03/06/5c7fc50d00926.jpeg" class="right" alt="4" width="400" height="400">
+</div>
+</body>
+</html>
+<script>
+  var imgs = $('.main > img')
+  console.log(imgs)
+  let i = 0
+    let time = setInterval(() => {
+      $(imgs[i]).removeClass('center').addClass('left');
+      $(imgs[i]).on('transitionend', function(e){
+        if ($(e.currentTarget).hasClass('left')) {
+            $(e.currentTarget).removeClass('left').addClass('right');
+        }
+      })
+      $(imgs[i+1]).removeClass('right').addClass('center');
+      if(i===4){
+        $(imgs[0]).removeClass('right').addClass('center');
+        i = i%4;
+      }else {
+        i = i + 1;
+      }
+    }, 2000);
+</script>
+
