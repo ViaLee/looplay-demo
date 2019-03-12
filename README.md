@@ -6,6 +6,7 @@ bug:
 到别的tab时，会懒惰，等切回来时一次完成
 
 解决方法：
+```
 document.addEventListener('visibilitychange', function(){
 if(document.hidden){
 document.clearInterval(time)
@@ -14,3 +15,4 @@ document.clearInterval(time)
 }
 console.log(document.hidden)})
 //切走 true
+```
