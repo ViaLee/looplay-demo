@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="title">
+        <h3>Apple-like Gallery</h3>
+        <h4>Slideshow</h4>
+    </div>
+    <div class="main">
+        <div class="show">
+            <div class="images">
+                <img src="https://i.loli.net/2019/03/06/5c7fc5098a369.jpeg" alt="1" width="300" height="300">
+                <img src="https://i.loli.net/2019/03/06/5c7fc50c23c0b.jpeg" alt="2" width="300" height="300">
+                <img src="https://i.loli.net/2019/03/06/5c7fc50cbf2ca.jpeg" alt="3" width="300" height="300">
+                <img src="https://i.loli.net/2019/03/06/5c7fc50d00926.jpeg" alt="4" width="300" height="300">
+                <img src="https://i.loli.net/2019/03/06/5c7fc50d02347.jpeg" alt="5" width="300" height="300">
+            </div>
+        </div>
+            <div id="button">
+                <span class="color">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
+    </div>
+</body>
+</html>
+<style>
+.title{
+    text-align: center;
+}
+.main{
+    margin: auto;
+    width: 300px;
+}
+.show{
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    border-bottom: none;
+}
+.images{
+    display: flex;
+    align-items: flex-start;
+    transition: all .5s;
+}
+.images > img{
+    width: 300px;
+    height: 300px;
+}
+#button{
+    border: 1px solid #eee;
+    color: #bee2e7;
+    cursor: pointer;
+    display: flex;
+    width: 300px;
+}
+#button span{
+    padding: 0 10px;
+    line-height: 40px;
+    flex-grow: 2;
+    text-align:center;
+}
+#button span:hover{
+    color:#497d83;
+    padding: 0 10px;
+    background: linear-gradient(to bottom,#bee2e7, rgb(245, 243, 243));
+}
+.color{
+    color:#497d83;
+    padding: 0 10px;
+    background: linear-gradient(to bottom,#bee2e7, rgb(245, 243, 243));
+}
+</style>
+<script>
+    var X = 300
+$('#button > span').on('click', function(e){
+    $(e.currentTarget).addClass('color').siblings().removeClass('color')
+    let x = $(e.currentTarget).index()*300
+    console.log(e.currentTarget)
+    X = x
+    $('.images').css({
+        transform: 'translateX(-' + x + 'px)'
+    })
+})
+setInterval(()=>{
+        if(X < 1500){
+            let index = X/300+1
+            // console.log($('#button span:nth-child('+index+')'))
+            $('.images').css({
+                transform: 'translateX(-' + X + 'px)'
+            })
+            $('#button span:nth-child('+index+')').addClass('color')
+            .siblings().removeClass('color')
+        X = X + 300
+        }else if(X === 1500){
+            X = 0
+        }
+    },3000)
+</script>
